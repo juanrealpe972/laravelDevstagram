@@ -15,9 +15,13 @@
     <header class="flex items-center justify-between border-b p-5 bg-white  shadow">
         <h1 class="text-3xl font-bold">Devstagram</h1>
         @auth
-            <nav class="flex gap-2 items-center">
-                <a class="font-bold uppercase text-gray-600" href="#">Hola <span class="font-bold">{{ auth()->user()->username }}</span></a>
-                <a class="font-bold uppercase text-gray-600" href="{{ route('logout') }}">Cerrar Sesión</a>
+            <nav class="flex gap-5 items-center">
+                <a class="font-bold uppercase text-gray-600" href="#">Hola <span
+                        class="font-bold">{{ auth()->user()->username }}</span></a>
+                <form action="{{ route('logout') }}" method="post">
+                    @csrf
+                    <button class="font-bold uppercase text-gray-600">Cerrar Sesión</button>
+                </form>
             </nav>
         @endauth {{-- el auth sirve para autenticar si un usuario es valido  --}}
         @guest
