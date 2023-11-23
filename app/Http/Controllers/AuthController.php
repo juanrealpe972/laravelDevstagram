@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -12,22 +11,32 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function login(Request $request)
+    public function store(Request $request)
     {
-        $credentials = $request->only('username', 'password');
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
 
-        if (Auth::attempt($credentials)) {
-            return view('principal');
+        auth()->attempt([
+            'email' => $request->email,
+            'password' => $request->password
+        ]);
+
+        if (!auth()->attempt($request->only("email", "password"))) {
+            return back()->with("mensaje", "Error en la autenticación, algo no coincide");
         }
 
-        return back()->withErrors([
-            'username' => 'El usuario o la contraseña son incorrectos.',
-        ]);
-    }
+        return redirect()->route("post.index");
 
-    public function logout()
-    {
-        Auth::logout();
-        return view('auth.register');
+        // $credentials = $request->only('email', 'password');
+
+        // if (Auth::attempt($credentials)) {
+        //     return redirect()->route("post.index");
+        // }
+
+        // return back()->withErrors([
+        //     'email' => 'El usuario o la contraseña son incorrectos.',
+        // ]);
     }
 }

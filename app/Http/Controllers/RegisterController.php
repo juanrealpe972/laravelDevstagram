@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -33,7 +34,12 @@ class RegisterController extends Controller
             "password" => Hash::make($request->password)
             // "password"=> bcrypt($request->password)
         ]);
-        return redirect()->route("register.index");
+        Auth()->attempt([
+            'email' => $request->email,
+            'password' => $request->password
+        ]);//Sirve para autenticar un usuario 
+
+        return redirect()->route("login");
         // dd("Inserte los datos del formulario");  
     }
 
