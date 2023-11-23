@@ -56,7 +56,7 @@
                     <input type="password" id="password_confirmation" name="password_confirmation"
                         placeholder="Repetir password" class="border p-3 w-full rounded-lg">
                 </div>
-                
+
                 <input type="submit" value="Crear cuenta"
                     class="bg-sky-600 hover:bg-sky-700 transition-colors cursor-pointer uppercase font-bold w-full p-3 text-white rounded-lg">
             </form>

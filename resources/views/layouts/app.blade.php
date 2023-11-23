@@ -15,7 +15,7 @@
     <header class="flex items-center justify-between border-b p-5 bg-white  shadow">
         <h1 class="text-3xl font-bold">Devstagram</h1>
         <nav>
-            <a href="" class="uppercase text-gray-600 font-bold text-small">
+            <a href="/login" class="uppercase text-gray-600 font-bold text-small">
                 Login
             </a>
             <a href="/register" class="uppercase text-gray-600 font-bold text-small">
